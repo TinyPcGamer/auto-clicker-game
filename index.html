@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Clicker Game</title>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; }
+        #clicker { width: 100px; cursor: pointer; }
+        button { margin: 10px; padding: 10px; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <h1>Auto Clicker Game</h1>
+    <h2>Points: <span id="points">0</span></h2>
+    <img id="clicker" src="clicker.png" alt="Clicker" onclick="clickButton()">
+    <br>
+    <button onclick="upgradeClick()">Upgrade Click (+1) - 10 Points</button>
+    <button onclick="upgradeAuto()">Auto Click (+1/sec) - 50 Points</button>
+    <button onclick="superUpgrade()">Super Clicker (x2 Power) - 200 Points</button>
+    <button onclick="doubleAuto()">Double Auto Click - 500 Points</button>
+
+    <script>
+        let points = 0;
+        let clickPower = 1;
+        let autoClickRate = 0;
+
+        function updatePoints() {
+            document.getElementById("points").innerText = points;
+        }
+
+        function clickButton() {
+            points += clickPower;
+            updatePoints();
+        }
+
+        function upgradeClick() {
+            if (points >= 10) {
+                points -= 10;
+                clickPower += 1;
+                updatePoints();
+            }
+        }
+
+        function upgradeAuto() {
+            if (points >= 50) {
+                points -= 50;
+                autoClickRate += 1;
+                updatePoints();
+            }
+        }
+
+        function superUpgrade() {
+            if (points >= 200) {
+                points -= 200;
+                clickPower *= 2;
+                updatePoints();
+            }
+        }
+
+        function doubleAuto() {
+            if (points >= 500) {
+                points -= 500;
+                autoClickRate *= 2;
+                updatePoints();
+            }
+        }
+
+        setInterval(() => {
+            points += autoClickRate;
+            updatePoints();
+        }, 1000);
+    </script>
+</body>
+</html>
